@@ -1,6 +1,6 @@
 resource  "aws_instance" "my_ec2" {
   ami = var.ami_id
-  instance_type = var.instance_type
+  instance_type = var.environment == "dev" ? "t2.micro" : "t3.micro"
   vpc_security_group_ids = [aws_security_group.sg.id]
 
   tags = var.ec2_tags
