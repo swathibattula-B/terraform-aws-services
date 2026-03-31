@@ -6,7 +6,7 @@ resource "aws_instance" "my_ec2"{
 
 }
 
-tags{
+tags ={
   name = "myec2"
   project="roboshop"
   env="dev"
@@ -18,14 +18,6 @@ resource "aws_security_group" "sg"{
 
 }
 
-ingress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-
 egress {
     from_port        = 0
     to_port          = 0
@@ -34,4 +26,17 @@ egress {
     ipv6_cidr_blocks = ["::/0"]
   }
 
+  ingress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
 
+
+tags ={
+  name=sg
+  project=roboshop
+  env=dev
+}
