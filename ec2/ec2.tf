@@ -6,10 +6,10 @@ resource "aws_instance" "my_ec2"{
 
 }
 
-tags ={
-  name = "myec2"
-  project="roboshop"
-  env="dev"
+  tags ={
+   name = "myec2"
+   project="roboshop"
+   env="dev"
 }
 
 resource "aws_security_group" "sg"{
@@ -18,7 +18,7 @@ resource "aws_security_group" "sg"{
 
 }
 
-egress {
+  egress {
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
@@ -35,8 +35,8 @@ egress {
   }
 
 
-tags ={
-  name=sg
-  project=roboshop
-  env=dev
+  tags ={
+    name=sg
+    project=roboshop
+    env=dev
 }
