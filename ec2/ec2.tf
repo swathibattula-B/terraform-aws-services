@@ -1,37 +1,37 @@
-resource "aws_instance" "example" {
-  ami           = "ami-0220d79f3f480ecf5"
-  instance_type = "t3.micro"
+resource "aws_instance" "my_ec2"{
+  ami = ""
+  instance_type="t3.micro"
+  description ="terraform"  #this is aws account
+  vpc_security_group_id=[aws_security_group.sg.id]
 
-  tags = {
-    Name = "HelloWorld"
+}
+
+tags{
+  name = "myec2"
+  project="roboshop"
+  env="dev"
+}
+
+resource "aws_security_group" "sg"{
+  name="terraform_sg"
+  description="allow all terraform ports"
+
+}
+
+ingress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
-}
 
-
-resource "aws_security_group" "allow_tls" {
-  name        = "allow_tls"
-  description = "Allow TLS inbound traffic and all outbound traffic"
-  vpc_id      = aws_vpc.main.id
-
-  tags = {
-    Name = "allow_tls"
+egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
-}
 
-resource "aws_vpc_security_group_ingress_rule" "example" {
-  security_group_id = aws_security_group.example.id
 
-  cidr_ipv4   = "10.0.0.0/8"
-  from_port   = 80
-  ip_protocol = "tcp"
-  to_port     = 80
-}
-
-resource "aws_vpc_security_group_egress_rule" "example" {
-  security_group_id = aws_security_group.example.id
-
-  cidr_ipv4   = "10.0.0.0/8"
-  from_port   = 80
-  ip_protocol = "tcp"
-  to_port     = 80
-}
