@@ -1,5 +1,5 @@
 resource  "aws_instance" "my_ec2"{
-  ami = ""
+  ami = "dynamic/ec2.tf"
   instance_type = "t3.micro"
   vpc_security_group_ids = [aws_security_group.sg.id]
 
