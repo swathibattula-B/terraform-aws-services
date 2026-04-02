@@ -1,10 +1,11 @@
 resource  "aws_instance" "my_ec2"{
-  ami = ""
+  # for_each = var.instances
+  ami = data.aws_ami.joindevops.id
   instance_type = "t3.micro"
   vpc_security_group_ids = [aws_security_group.sg.id]
 
   tags = {
-    Name = "swathi"
+    Name =  "swathi"
     project = "robooshop"
   }
 }
@@ -32,9 +33,5 @@ resource "aws_security_group" "sg"{
   tags = {
     Name = "TERRAFORM"
 
-  }
-
-  lifecycle {
-    create_before_destroy = true
   }
 }
